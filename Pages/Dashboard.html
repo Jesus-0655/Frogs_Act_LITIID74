@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Frog View</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="../Style/style.css" rel="stylesheet">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 bg-light">
 
     <nav class="navbar navbar-expand-lg bg-success navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="Dashboard.html">Frog View</a>
             <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item"><a class="nav-link active" href="Dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="Dashboard.html">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="Frog.html">Ranas</a></li>
                 <li class="nav-item"><a class="nav-link" href="Ranking.html">Ranking</a></li>
                 <li class="nav-item"><button class="btn btn-outline-light btn-sm ms-lg-2" onclick="cerrarSesion('../index.html')">Salir</button></li>
@@ -21,26 +22,77 @@
         </div>
     </nav>
 
-    <main class="container my-5 flex-grow-1">
-        <h1 id="saludo" class="mb-4"></h1>
-        <div class="row g-4">
-            <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body">
-                <h6 class="text-muted">Tu voto</h6><div id="tuVoto"></div>
-            </div></div></div>
-            <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body">
-                <h6 class="text-muted">Participantes</h6><p class="display-6" id="totalUsuarios"></p>
-            </div></div></div>
-            <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body">
-                <h6 class="text-muted">Rana líder</h6><div id="lider"></div>
-            </div></div></div>
+    <main class="container my-4 flex-grow-1">
+
+        <!-- Banner de bienvenida -->
+        <section class="hero rounded-4 p-4 p-md-5 mb-4 shadow">
+            <h1 class="display-5 fw-bold mb-2">¡Hola, <span id="saludo"></span>!</h1>
+            <p class="lead mb-4">Estas especies de ranas necesitan ayuda. Tu voto decide cuál es la favorita.</p>
+            <a href="Frog.html" class="btn btn-light me-2"><i class="bi bi-hand-thumbs-up-fill"></i> Votar</a>
+            <a href="Ranking.html" class="btn btn-outline-light"><i class="bi bi-bar-chart-fill"></i> Ver ranking</a>
+        </section>
+
+        <!-- Tu voto y rana líder -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm card-hover">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase"><i class="bi bi-heart-fill text-danger"></i> Tu voto</h6>
+                        <div id="tuVoto"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm card-hover">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase"><i class="bi bi-trophy-fill text-warning"></i> Rana líder</h6>
+                        <div id="lider"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="text-center mt-4">
-            <a href="Frog.html" class="btn btn-success">Ver ranas y votar</a>
-            <a href="Ranking.html" class="btn btn-outline-success">Ver ranking</a>
+
+        <!-- Estadísticas -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-people-fill fs-1 text-success"></i>
+                        <p class="display-6 mb-0" id="totalUsuarios">0</p>
+                        <small class="text-muted">Participantes</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-check2-square fs-1 text-primary"></i>
+                        <p class="display-6 mb-0" id="totalVotos">0</p>
+                        <small class="text-muted">Votos emitidos</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center card-hover">
+                    <div class="card-body">
+                        <i class="bi bi-exclamation-triangle-fill fs-1 text-danger"></i>
+                        <p class="display-6 mb-0" id="totalRanas">0</p>
+                        <small class="text-muted">Especies en peligro</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top 3 -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="mb-3"><i class="bi bi-award-fill text-warning"></i> Top 3 del momento</h5>
+                <div id="top3" class="d-flex flex-column gap-3"></div>
+            </div>
         </div>
     </main>
 
-    <footer class="bg-light py-3">
+    <footer class="bg-white py-3 border-top">
         <p class="text-center mb-0">© 2026 Frog View. All rights reserved.</p>
     </footer>
 
@@ -49,17 +101,80 @@
     <script src="../Js/auth.js"></script>
     <script>
         const u = requerirSesion("../index.html");
-        saludo.textContent = "¡Hola, " + u.nametag + "!";
-        totalUsuarios.textContent = DB.leer("usuarios", []).length;
-
-        const mio = frogs.find(f => f.id === miVoto());
-        tuVoto.innerHTML = mio ? `<strong>${mio.nombre}</strong>` : `<span class="text-muted">Aún no has votado</span>`;
-
         const conteo = conteoVotos();
-        const top = frogs.reduce((a, b) => conteo[b.id] > conteo[a.id] ? b : a);
-        lider.innerHTML = conteo[top.id] > 0
-            ? `<strong>${top.nombre}</strong><br>${conteo[top.id]} voto(s)`
-            : `<span class="text-muted">Aún no hay votos</span>`;
+        const totalVotos = Object.values(conteo).reduce((a, b) => a + b, 0);
+        const ordenadas = [...frogs].sort((a, b) => conteo[b.id] - conteo[a.id]);
+        const placeholder = "this.src='https://placehold.co/110x110?text=?'";
+
+        // Textos y estadísticas
+        document.getElementById("saludo").textContent = u.nametag;
+        document.getElementById("totalUsuarios").textContent = DB.leer("usuarios", []).length;
+        document.getElementById("totalVotos").textContent = totalVotos;
+        document.getElementById("totalRanas").textContent = frogs.length;
+
+        // Tu voto, con posición en el ranking
+        const mio = frogs.find(f => f.id === miVoto());
+        if (mio) {
+            const posicion = 1 + frogs.filter(f => conteo[f.id] > conteo[mio.id]).length;
+            document.getElementById("tuVoto").innerHTML = `
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../Img/${mio.img}" class="dash-img rounded-3" alt="${mio.nombre}" onerror="${placeholder}">
+                    <div>
+                        <h5 class="mb-1">${mio.nombre}</h5>
+                        <p class="fst-italic text-muted mb-2">${mio.cientifico}</p>
+                        <span class="badge bg-success">Va en el lugar ${posicion}</span>
+                        <span class="badge bg-secondary">${conteo[mio.id]} voto${conteo[mio.id] === 1 ? '' : 's'}</span>
+                    </div>
+                </div>`;
+        } else {
+            document.getElementById("tuVoto").innerHTML = `
+                <div class="text-center py-3">
+                    <i class="bi bi-emoji-neutral fs-1 text-muted"></i>
+                    <p class="text-muted mb-2">Aún no has votado</p>
+                    <a href="Frog.html" class="btn btn-sm btn-success">Elegir mi rana</a>
+                </div>`;
+        }
+
+        // Rana líder
+        const ganadora = ordenadas[0];
+        if (conteo[ganadora.id] > 0) {
+            document.getElementById("lider").innerHTML = `
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../Img/${ganadora.img}" class="dash-img rounded-3" alt="${ganadora.nombre}" onerror="${placeholder}">
+                    <div>
+                        <h5 class="mb-1">${ganadora.nombre}</h5>
+                        <p class="fst-italic text-muted mb-2">${ganadora.cientifico}</p>
+                        <span class="badge bg-warning text-dark">🥇 ${conteo[ganadora.id]} voto${conteo[ganadora.id] === 1 ? '' : 's'}</span>
+                    </div>
+                </div>`;
+        } else {
+            document.getElementById("lider").innerHTML = `
+                <div class="text-center py-3">
+                    <i class="bi bi-hourglass-split fs-1 text-muted"></i>
+                    <p class="text-muted mb-0">Aún no hay votos</p>
+                </div>`;
+        }
+
+        // Top 3 con barras
+        const medallas = ["🥇", "🥈", "🥉"];
+        const top3 = document.getElementById("top3");
+        if (totalVotos === 0) {
+            top3.innerHTML = `<p class="text-muted mb-0">Cuando haya votos, aquí aparecerán las tres favoritas.</p>`;
+        } else {
+            ordenadas.slice(0, 3).forEach((r, i) => {
+                const pct = Math.round((conteo[r.id] / totalVotos) * 100);
+                top3.insertAdjacentHTML("beforeend", `
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <span>${medallas[i]} ${r.nombre}</span>
+                            <small class="text-muted">${conteo[r.id]} voto${conteo[r.id] === 1 ? '' : 's'} (${pct}%)</small>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar bg-success" style="width: ${pct}%"></div>
+                        </div>
+                    </div>`);
+            });
+        }
     </script>
 </body>
 </html>

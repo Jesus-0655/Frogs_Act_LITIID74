@@ -2,3 +2,22 @@
     height: 220px;
     object-fit: cover;
 }
+
+.hero {
+    background: linear-gradient(135deg, #198754, #0f5132);
+    color: #fff;
+}
+
+.card-hover {
+    transition: transform .2s, box-shadow .2s;
+}
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.dash-img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+}
