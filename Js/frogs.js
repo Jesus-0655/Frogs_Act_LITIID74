@@ -27,14 +27,23 @@ const frogs = [
     ubicacion: "Chocó biogeográfico (Colombia)", estado: "CR", img: "lehmann.jpeg",
     desc: "Franjas negras con rojo, naranja o amarillo. Sus alcaloides tóxicos vienen de su dieta de hormigas y ácaros. Amenazada por el tráfico de mascotas." },
   { id: 10, nombre: "Rana de Darwin", cientifico: "Rhinoderma darwinii",
-    ubicacion: "Bosques templados de Chile y Argentina", estado: "EN", img: "darwin.jpeg",
+    ubicacion: "Bosques templados de Chile y Argentina", estado: "EN", img: "darwin.jpg",
     desc: "El macho guarda los huevos en su saco vocal hasta que las crías completan la metamorfosis y salen por su boca." },
   { id: 11, nombre: "Rana de Tláloc", cientifico: "Lithobates tlaloci",
     ubicacion: "Chocó biogeográfico (Colombia)", estado: "CR", img: "tlaloc.jpg",
     desc: "Es de talla mediana, alcanza una longitud de 6.3 cm. Las extremidades son relativamente cortas. La cabeza es ancha, hocico corto y redondeado. Tiene pliegues dorso-laterales notablemente elevados de color bronce. El color de fondo es un canela dorado con manchas ovoides irregulares más oscuras." },
   { id: 12, nombre: "Rana leopardo de patas grandes", cientifico: "Lithobates megapoda",
     ubicacion: "Se encuentra en los estados de Nayarit, Jalisco, Michoacán y Guanajuato (México)", estado: "EN", img: "leopardo.jpeg",
-    desc: "Destaca por tener extremidades traseras muy grandes y musculosas en proporción a su cuerpo, además de presentar el característico patrón de manchas de las ranas leopardo." }
+    desc: "Destaca por tener extremidades traseras muy grandes y musculosas en proporción a su cuerpo, además de presentar el característico patrón de manchas de las ranas leopardo." },
+  { id: 13, nombre: "Rana de cristal de María Elena", cientifico: "Chimerella mariaelenae",
+    ubicacion: "Bosques nublados de la vertiente amazónica de los Andes (Ecuador)", estado: "EN", img: "chimerella.jpg",
+    desc: "Es una especie de anfibio anuro de la familia Centrolenidae, la única de su género. Es una rana muy pequeña; los machos miden cerca de 19.0 mm de longitud hocico-cloaca y las hembras alrededor de 20.3 mm." },
+  { id: 14, nombre: "Rana de cabeza de pala de el Triunfo", cientifico: "Triprion petasatus",
+    ubicacion: "Zonas boscosas muy restringidas y amenazadas de México y Centroamérica", estado: "EN", img: "tripion.jpg",
+    desc: "Esta rana tiene el cráneo completamente modificado y plano. Utiliza esta extraña estructura ósea para encajar perfectamente en los agujeros de los árboles; bloquea la entrada con su cabeza hiper-resistente para evitar que entren depredadores o para mantener la humedad de su cuerpo." },
+  { id: 15, nombre: "Rana de arroyo del Río Negro", cientifico: "Hyloscirtus tolkieni",
+    ubicacion: "Bosques de los Andes (Ecuador)", estado: "CR", img: "anillos.jpg",
+    desc: "Es de color verde grisáceo con marcas amarillas y negras. El iris del ojo es rosa con un borde negro. Tiene manchas amarillas y negras en el vientre y los flancos. Los científicos que publicaron la primera descripción de esta especie nombraron a esta rana en honor al autor JRR Tolkien, autor de El Hobbit" }
 ];
 
 const estados = {

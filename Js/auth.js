@@ -51,9 +51,11 @@ function cerrarSesion(rutaLogin) {
 // ---- Votos ----
 function votar(idRana) {
   const u = usuarioActual();
+  if (!u) return false;               // sin sesión no se puede votar
   const votos = DB.leer("votos", {});
   votos[u.correo] = idRana;
   DB.guardar("votos", votos);
+  return true;
 }
 
 function miVoto() {
@@ -67,4 +69,13 @@ function conteoVotos() {
   frogs.forEach(f => conteo[f.id] = 0);
   Object.values(DB.leer("votos", {})).forEach(id => conteo[id]++);
   return conteo;
+}
+
+// Muestra "Salir" si hay sesión o "Iniciar sesión" si no la hay
+function pintarBotonSesion(idContenedor, rutaLogin) {
+  const el = document.getElementById(idContenedor);
+  if (!el) return;
+  el.innerHTML = usuarioActual()
+    ? `<button class="btn btn-outline-light btn-sm ms-2" onclick="cerrarSesion('${rutaLogin}')">Salir</button>`
+    : `<a class="btn btn-light btn-sm ms-2" href="${rutaLogin}">Iniciar sesión</a>`;
 }

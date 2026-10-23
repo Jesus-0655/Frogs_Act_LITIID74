@@ -16,7 +16,7 @@
                 <li class="nav-item"><a class="nav-link" href="Dashboard.html">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="Frog.html">Ranas</a></li>
                 <li class="nav-item"><a class="nav-link active" href="Ranking.html">Ranking</a></li>
-                <li class="nav-item"><button class="btn btn-outline-light btn-sm ms-2" onclick="cerrarSesion('../index.html')">Salir</button></li>
+                <li class="nav-item" id="navSesion"></li>
             </ul>
         </div>
     </nav>
@@ -40,11 +40,11 @@
     <script src="../Js/frogs.js"></script>
     <script src="../Js/auth.js"></script>
     <script>
-        requerirSesion("../index.html");
+        pintarBotonSesion("navSesion", "../index.html");
 
         const conteo = conteoVotos();
         const total = Object.values(conteo).reduce((a, b) => a + b, 0);
-        const voto = miVoto();
+        const voto = miVoto();   // null si no hay sesión
         const ordenadas = [...frogs].sort((a, b) => conteo[b.id] - conteo[a.id]);
 
         document.getElementById("resumen").textContent =

@@ -17,40 +17,74 @@
                 <li class="nav-item"><a class="nav-link active" href="Dashboard.html">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="Frog.html">Ranas</a></li>
                 <li class="nav-item"><a class="nav-link" href="Ranking.html">Ranking</a></li>
-                <li class="nav-item"><button class="btn btn-outline-light btn-sm ms-lg-2" onclick="cerrarSesion('../index.html')">Salir</button></li>
+                <li class="nav-item" id="navSesion"></li>
             </ul>
         </div>
     </nav>
 
     <main class="container my-4 flex-grow-1">
 
-        <!-- Banner de bienvenida -->
+        <!-- Banner -->
         <section class="hero rounded-4 p-4 p-md-5 mb-4 shadow">
             <h1 class="display-5 fw-bold mb-2">¡Hola, <span id="saludo"></span>!</h1>
-            <p class="lead mb-4">Estas especies de ranas necesitan ayuda. Tu voto decide cuál es la favorita.</p>
-            <a href="Frog.html" class="btn btn-light me-2"><i class="bi bi-hand-thumbs-up-fill"></i> Votar</a>
+            <p class="lead mb-4">Conoce, vota y descubre las ranas favoritas de la comunidad.</p>
+            <a id="btnPrincipal" href="Frog.html" class="btn btn-light me-2"></a>
             <a href="Ranking.html" class="btn btn-outline-light"><i class="bi bi-bar-chart-fill"></i> Ver ranking</a>
         </section>
 
-        <!-- Tu voto y rana líder -->
-        <div class="row g-4 mb-4">
-            <div class="col-lg-6">
+        <!-- Presentación + carrusel -->
+        <section class="row g-4 align-items-center mb-4">
+            <div class="col-lg-5">
+                <h2 class="fw-bold text-success mb-3">¡Bienvenido a Frog View!</h2>
+                <p>Descubre una selección de especies de ranas que actualmente enfrentan distintos niveles de amenaza y riesgo de extinción. Nuestro objetivo es acercar al público a estas fascinantes especies, compartiendo información sobre sus características, hábitats y situación actual.</p>
+                <p class="mb-0">Explora cada ficha, conoce sus historias y participa votando por la rana que te parezca más interesante, sorprendente o llamativa. El ranking refleja únicamente las preferencias de nuestra comunidad y nos permite conocer qué especies generan mayor interés entre los visitantes.</p>
+            </div>
+            <div class="col-lg-7">
+                <div id="carruselRanas" class="carousel slide shadow rounded-4 overflow-hidden">
+                    <div class="carousel-indicators" id="carruselIndicadores"></div>
+                    <div class="carousel-inner" id="carruselItems"></div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carruselRanas" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carruselRanas" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cómo funciona -->
+        <section class="row g-4 mb-4 text-center">
+            <div class="col-md-4">
                 <div class="card h-100 shadow-sm card-hover">
                     <div class="card-body">
-                        <h6 class="text-muted text-uppercase"><i class="bi bi-heart-fill text-danger"></i> Tu voto</h6>
-                        <div id="tuVoto"></div>
+                        <span class="paso-icono bg-success-subtle text-success mb-3"><i class="bi bi-search"></i></span>
+                        <h5>1. Explora</h5>
+                        <p class="text-muted mb-0">Conoce a cada especie: su aspecto, dónde vive y qué tan amenazada está.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-4">
                 <div class="card h-100 shadow-sm card-hover">
                     <div class="card-body">
-                        <h6 class="text-muted text-uppercase"><i class="bi bi-trophy-fill text-warning"></i> Rana líder</h6>
-                        <div id="lider"></div>
+                        <span class="paso-icono bg-primary-subtle text-primary mb-3"><i class="bi bi-hand-thumbs-up-fill"></i></span>
+                        <h5>2. Vota</h5>
+                        <p class="text-muted mb-0">Inicia sesión y elige a la rana que más te sorprenda. Puedes cambiar tu voto cuando quieras.</p>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm card-hover">
+                    <div class="card-body">
+                        <span class="paso-icono bg-warning-subtle text-warning-emphasis mb-3"><i class="bi bi-trophy-fill"></i></span>
+                        <h5>3. Descubre</h5>
+                        <p class="text-muted mb-0">Mira en el ranking cuáles son las favoritas de la comunidad.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Estadísticas -->
         <div class="row g-4 mb-4">
@@ -83,6 +117,26 @@
             </div>
         </div>
 
+        <!-- Tu voto y rana líder -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm card-hover">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase"><i class="bi bi-heart-fill text-danger"></i> Tu voto</h6>
+                        <div id="tuVoto"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm card-hover">
+                    <div class="card-body">
+                        <h6 class="text-muted text-uppercase"><i class="bi bi-trophy-fill text-warning"></i> Rana líder</h6>
+                        <div id="lider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Top 3 -->
         <div class="card shadow-sm">
             <div class="card-body">
@@ -100,21 +154,75 @@
     <script src="../Js/frogs.js"></script>
     <script src="../Js/auth.js"></script>
     <script>
-        const u = requerirSesion("../index.html");
+        pintarBotonSesion("navSesion", "../index.html");
+
+        const u = usuarioActual();   // puede ser null (visitante)
         const conteo = conteoVotos();
         const totalVotos = Object.values(conteo).reduce((a, b) => a + b, 0);
         const ordenadas = [...frogs].sort((a, b) => conteo[b.id] - conteo[a.id]);
         const placeholder = "this.src='https://placehold.co/110x110?text=?'";
 
-        // Textos y estadísticas
-        document.getElementById("saludo").textContent = u.nametag;
-        document.getElementById("totalUsuarios").textContent = DB.leer("usuarios", []).length;
-        document.getElementById("totalVotos").textContent = totalVotos;
-        document.getElementById("totalRanas").textContent = frogs.length;
+        // Números que suben animados
+        function contar(id, meta) {
+            const el = document.getElementById(id);
+            if (meta === 0) { el.textContent = 0; return; }
+            const duracion = 900, inicio = performance.now();
+            function paso(ahora) {
+                const t = Math.min((ahora - inicio) / duracion, 1);
+                el.textContent = Math.round(meta * t);
+                if (t < 1) requestAnimationFrame(paso);
+            }
+            requestAnimationFrame(paso);
+        }
+
+        // Banner: saludo y botón principal según el usuario
+        document.getElementById("saludo").textContent = u ? u.nametag : "visitante";
+        document.getElementById("btnPrincipal").innerHTML = u
+            ? '<i class="bi bi-hand-thumbs-up-fill"></i> Votar'
+            : '<i class="bi bi-search"></i> Explorar ranas';
+
+        // Estadísticas
+        contar("totalUsuarios", DB.leer("usuarios", []).length);
+        contar("totalVotos", totalVotos);
+        contar("totalRanas", frogs.length);
+
+        // Carrusel con ranas al azar
+        const destacadas = [...frogs].sort(() => Math.random() - 0.5).slice(0, 5);
+        const indicadores = document.getElementById("carruselIndicadores");
+        const items = document.getElementById("carruselItems");
+
+        destacadas.forEach((r, i) => {
+            const e = estados[r.estado];
+            const activo = i === 0 ? "active" : "";
+            indicadores.insertAdjacentHTML("beforeend", `
+                <button type="button" data-bs-target="#carruselRanas" data-bs-slide-to="${i}"
+                        class="${activo}" aria-label="Rana ${i + 1}"></button>`);
+            items.insertAdjacentHTML("beforeend", `
+                <div class="carousel-item frog-slide ${activo}">
+                    <img src="../Img/${r.img}" alt="${r.nombre}"
+                         onerror="this.src='https://placehold.co/800x380?text=Imagen+no+disponible'">
+                    <div class="carousel-caption">
+                        <span class="badge ${e.clase} mb-2">${e.texto}</span>
+                        <h4 class="mb-0">${r.nombre}</h4>
+                        <p class="fst-italic small mb-1">${r.cientifico}</p>
+                        <p class="frog-desc small mb-2">${r.desc}</p>
+                        <a href="Frog.html" class="btn btn-success btn-sm">Conocerla</a>
+                    </div>
+                </div>`);
+        });
+
+        new bootstrap.Carousel("#carruselRanas", { interval: 4500, ride: "carousel" });
 
         // Tu voto, con posición en el ranking
         const mio = frogs.find(f => f.id === miVoto());
-        if (mio) {
+        if (!u) {
+            document.getElementById("tuVoto").innerHTML = `
+                <div class="text-center py-3">
+                    <i class="bi bi-person-lock fs-1 text-muted"></i>
+                    <p class="text-muted mb-2">Inicia sesión para votar</p>
+                    <a href="../index.html" class="btn btn-sm btn-success">Iniciar sesión</a>
+                </div>`;
+        } else if (mio) {
             const posicion = 1 + frogs.filter(f => conteo[f.id] > conteo[mio.id]).length;
             document.getElementById("tuVoto").innerHTML = `
                 <div class="d-flex align-items-center gap-3">
